@@ -1,0 +1,2 @@
+-p <filePath> download file path
+-t <time> download file time. support 'HH:mm:ss'. example '01:00:00'
