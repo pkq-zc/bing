@@ -1,0 +1,14 @@
+{
+  "host" : "127.0.0.1",
+  "port" : 3306,
+  "maxPoolSize" : 10,
+  "username" : "root",
+  "password" : "root",
+  "database" : "jpa",
+  "charset" : "utf8",
+  "connectTimeout" : 1000,
+  "testTimeout" : 1000,
+  "queryTimeout" : 5000,
+  "maxConnectionRetries" : 3,
+  "connectionRetryDelay" : 3
+}

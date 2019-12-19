@@ -21,4 +21,9 @@ public class DateTimeUtils {
     return sdf.format(date);
   }
 
+  public static String date2String(Date date,String format){
+    SimpleDateFormat sdf = new SimpleDateFormat(format);
+    return sdf.format(date);
+  }
+
 }

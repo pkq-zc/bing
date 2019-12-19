@@ -1,5 +1,6 @@
 package com.buydeem.bing;
 
+import com.buydeem.bing.dao.ImageInfoService;
 import com.buydeem.bing.mode.Image;
 import com.buydeem.bing.utils.DateTimeUtils;
 import io.vertx.core.AbstractVerticle;
@@ -21,6 +22,7 @@ public class BingGetVerticle extends AbstractVerticle {
   private static final String BING_API = "https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1";
   private static final String HOST = "https://cn.bing.com";
   private static final long DAY = 24 * 60 * 60 * 1000L;
+  private ImageInfoService imageInfoService;
   /**
    * 文件保存路径
    */
@@ -42,7 +44,9 @@ public class BingGetVerticle extends AbstractVerticle {
 
   @Override
   public void start() throws Exception {
+    System.out.println("vertx = " + vertx);
     super.start();
+    imageInfoService = new ImageInfoService(vertx);
     Long temp = calDelay();
     Long delay = temp > 0 ? DAY - temp : -temp;
     log.debug("还有{}分钟将执行任务",delay % (60*1000) == 0 ? delay / (60*1000) : delay / (60*1000) +1);
@@ -68,6 +72,7 @@ public class BingGetVerticle extends AbstractVerticle {
           Image image = processResult(response);
           //文件写出
           write2File(image);
+          imageInfoService.insert(image);
         }
         if (item.failed()){
           //失败
