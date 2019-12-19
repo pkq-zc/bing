@@ -1,5 +1,6 @@
 package com.buydeem.bing;
 
+import com.buydeem.bing.api.WebService;
 import com.buydeem.bing.dao.ImageInfoService;
 import com.buydeem.bing.mode.Image;
 import com.buydeem.bing.utils.DateTimeUtils;
@@ -44,7 +45,6 @@ public class BingGetVerticle extends AbstractVerticle {
 
   @Override
   public void start() throws Exception {
-    System.out.println("vertx = " + vertx);
     super.start();
     imageInfoService = new ImageInfoService(vertx);
     Long temp = calDelay();
@@ -55,6 +55,7 @@ public class BingGetVerticle extends AbstractVerticle {
       log.debug("启动周期循环任务");
       vertx.setPeriodic(DAY,t ->downloadPic());
     });
+    new WebService(vertx);
   }
 
 

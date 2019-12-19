@@ -38,7 +38,6 @@ public class AppStart {
       String path = Optional.of(map.get("-p")).get();
       createPath(vertx.fileSystem(),path);
       vertx.deployVerticle(new BingGetVerticle(path,date));
-      System.out.println("vertx = " + vertx);
     }catch (Exception e){
       errorInfo();
       return;
